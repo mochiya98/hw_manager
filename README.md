@@ -30,7 +30,7 @@ please lookup [mochiya98/hw_manager_api](https://github.com/mochiya98/hw_manager
 get all homeworks.
 
 ### [PUT] /hws/:hwid
-create and edit a homework.
+add and edit a homework.
 
 ### [DELETE] /hws/:hwid
 delete homeworks.
