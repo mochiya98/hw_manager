@@ -1,0 +1,17 @@
+export const subjectList = [
+	"AP3S",
+	"BT31",
+	"CR32",
+	"FE3S",
+	"FX31",
+	"IP3S",
+	"IW31",
+	"IW32",
+	"MD31",
+	"ND3S",
+	"OT3E",
+	"SG31",
+	"WA31",
+	"WD33",
+	"WP32",
+];
