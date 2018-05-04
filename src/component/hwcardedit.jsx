@@ -21,7 +21,7 @@ export default ({hwid, hw}) => {
 		elSCodeInput.disabled = !isEtc;
 		elSCodeInput.value = e.target.value;
 	}
-	function onSaveButtonClick({e, hw, actions}){
+	function onSaveButtonClick({actions, e, hw}){
 		hw = {...hw};
 		const s_code = elSCodeInput.value;
 		const no_txt = elNoInput.value;
