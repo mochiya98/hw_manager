@@ -57,6 +57,7 @@ module.exports = (env, argv) => {
 							{
 								loader : "css-loader",
 								options: {
+									url     : false,
 									minimize: true, // CSS の minify を行う
 								},
 							}
