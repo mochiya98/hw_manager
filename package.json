@@ -2,6 +2,7 @@
 	"name": "hw_manager",
 	"version": "0.1.1",
 	"description": "hw_manager",
+	"author": "Yukimasa Funaoka <yukimasafunaoka@gmail.com>",
 	"main": "webpack.config.js",
 	"dependencies": {
 		"htmlspecialchars": "^1.0.5",
