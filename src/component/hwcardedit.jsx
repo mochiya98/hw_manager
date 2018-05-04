@@ -77,7 +77,7 @@ export default ({hwid, hw}) => {
 				<div className="hwedit-scodeform">
 					<select
 						selectedIndex={si !== -1 ? si : subjectList.length}
-						onChange={onSCodeSelectUpdate}
+						onchange={onSCodeSelectUpdate}
 					>
 						{subjectList.map((val)=>(
 							<option value={val}>{val}</option>
