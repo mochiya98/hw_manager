@@ -87,6 +87,7 @@ export default ({match}) => ($state, $actions) => {
 			<div className="hwcard-commentinput">
 				<HwCardBtn
 					stretch
+					disabled={state.isHomeworkRemoving}
 					loading={state.isCommentSending}
 					onclick={(e)=>onCommentSendBtnClick(e)}
 				>
