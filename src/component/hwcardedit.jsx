@@ -8,6 +8,7 @@ import {
 	unixtime2date,
 } from "util/dateparser";
 import notifier from "util/notifier";
+import HwCardBtn from "component/hwcardbtn";
 
 
 export default ({hwid, hw}) => {
@@ -118,21 +119,21 @@ export default ({hwid, hw}) => {
 				/>
 			</div>
 			<div className="hwcard-editcp">
-				<button
-					className="hwcard-btn hwcard-btn--stretch"
+				<HwCardBtn
+					stretch
 					onclick={(e)=>onSaveButtonClick({actions, e, hw})}
 				>
 					保存する
-				</button>
+				</HwCardBtn>
 			</div>
 			<hr />
 			<div className="hwcard-historyback">
-				<button
-					className="hwcard-btn hwcard-btn--stretch"
+				<HwCardBtn
+					stretch
 					onclick={()=>history.back()}
 				>
 					前のページに戻る
-				</button>
+				</HwCardBtn>
 			</div>
 		</div>
 	);

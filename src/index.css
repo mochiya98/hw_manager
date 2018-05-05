@@ -270,12 +270,32 @@ body{
 	cursor:pointer;
 	text-align:center;
 	margin:7px 0;
+	position:relative;
+	top:0;
+	left:0;
 }
 .hwcard-btn:hover{
 	background-color:#ddd;
 }
 .hwcard-btn--stretch{
 	width:100%;
+}
+.hwcard-btn--loading, .hwcard-btn--loading:hover{
+	background-color:#f6f9f6;
+	color:#999;
+}
+.hwcard-btn--loading:after{
+	content:"";
+	display:block;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDUwIDUwIiBmaWxsPSIjMzkzIj48cGF0aCBkPSJNNDMuOTQgMjUuMTRhMTguNjggMTguNjggMCAxIDAtMzcuMzcgMGg0LjA3YTE0LjYyIDE0LjYyIDAgMCAxIDI5LjIzIDBoNC4wN3oiPjxhbmltYXRlVHJhbnNmb3JtIGF0dHJpYnV0ZVR5cGU9InhtbCIgYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIGZyb209IjAgMjUgMjUiIHRvPSIzNjAgMjUgMjUiIGR1cj0iMC42cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L3BhdGg+PC9zdmc+);
+	background-repeat: no-repeat;
+	background-size: auto 100%;
+	background-position: center;
 }
 .removebtn{
 	border-color:#c44;

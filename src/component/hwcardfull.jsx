@@ -1,7 +1,8 @@
 import {h} from "hyperapp";
 import {location} from "hyperapp-hash-router";
 
-import HwCardBase from "./hwcardbase";
+import HwCardBase from "component/hwcardbase";
+import HwCardBtn from "component/hwcardbtn";
 
 function onCommentSendBtnClick(e, hw, actions){
 	const hwcard = e.target.parentNode.parentNode;
@@ -39,18 +40,18 @@ export default ({hw}) => {
 		<HwCardBase hw={hw}>
 			<div className="hwcard-fulldesc">
 				<div className="control">
-					<button
-						className="hwcard-btn removebtn"
+					<HwCardBtn
+						className="removebtn"
 						onclick={(e)=>onRemoveBtnClick(e, hw, actions)}
 					>
 						削除
-					</button>
-					<button
-						className="hwcard-btn editbtn"
+					</HwCardBtn>
+					<HwCardBtn
+						className="editbtn"
 						onclick={()=>location.actions.go("/hws/" + hw.id + "/edit")}
 					>
 						編集
-					</button>
+					</HwCardBtn>
 				</div>
 				<div className="s_code">{hw.s_code}</div>
 				<div className="no">No.{hw.no}</div>
@@ -66,21 +67,21 @@ export default ({hw}) => {
 				<textarea rows={4} className="hwcard-comment-ta"></textarea>
 			</div>
 			<div className="hwcard-commentinput">
-				<button
-					className="hwcard-btn hwcard-btn--stretch"
+				<HwCardBtn
+					stretch
 					onclick={(e)=>onCommentSendBtnClick(e, hw, actions)}
 				>
 					コメント送信
-				</button>
+				</HwCardBtn>
 			</div>
 			<hr />
 			<div className="hwcard-historyback">
-				<button
-					className="hwcard-btn hwcard-btn--stretch"
+				<HwCardBtn
+					stretch
 					onclick={()=>history.back()}
 				>
 					前のページに戻る
-				</button>
+				</HwCardBtn>
 			</div>
 		</HwCardBase>
 	);
