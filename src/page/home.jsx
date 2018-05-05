@@ -3,13 +3,12 @@ import {location} from "hyperapp-hash-router";
 
 import HwCardTiny from "component/hwcardtiny";
 import {generateUuid} from "util/generateuuid";
+import ScopeSelector from "component/scope-selector";
 
 export default () => (state, actions) => {
 	const tstate = state.page.home;
 	const tactions = actions.page.home;
-	function onScopeChange(){
-		const selected_scope =
-			document.forms.scope_selector.scope.value;
+	function onScopeChange(selected_scope){
 		tactions.updateCurrentScope(selected_scope);
 	}
 	function onAddButtonClick(){
@@ -17,28 +16,21 @@ export default () => (state, actions) => {
 	}
 	return (
 		<div class="page-home">
-			<form name="scope_selector">
-				<ul class="scope_bar">
-					<li>
-						<input
-							type="radio" name="scope" id="scope1"
-							checked={tstate.current_scope === "hws_future"}
-							value="hws_future"
-							onchange={onScopeChange}
-						/>
-						<label for="scope1">今後の課題</label>
-					</li>
-					<li>
-						<input
-							type="radio" name="scope" id="scope2"
-							checked={tstate.current_scope === "hws_expired"}
-							value="hws_expired"
-							onchange={onScopeChange}
-						/>
-						<label for="scope2">期限切れ</label>
-					</li>
-				</ul>
-			</form>
+			<ScopeSelector
+				current={tstate.current_scope}
+				onchange={onScopeChange}
+				sid="hws_type"
+				scopes={[
+					{
+						id   : "hws_future",
+						label: "今後の課題",
+					},
+					{
+						id   : "hws_expired",
+						label: "期限切れ",
+					},
+				]}
+			/>
 			{(() => {
 				if(tstate.current_scope === "hws_future"){
 					return (
