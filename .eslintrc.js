@@ -94,7 +94,7 @@ module.exports = {
 		}],
 		"linebreak-style"              : ["error", "unix"],
 		"new-parens"                   : ["error"],
-		"newline-per-chained-call"     : ["warn", {"ignoreChainWithDepth": 1}],
+		"newline-per-chained-call"     : ["warn", {"ignoreChainWithDepth": 3}],
 		"no-array-constructor"         : ["warn"],
 		"no-lonely-if"                 : ["warn"],
 		"no-multiple-empty-lines"      : ["error", {"max": 5, "maxBOF": 0, "maxEOF": 0}],
