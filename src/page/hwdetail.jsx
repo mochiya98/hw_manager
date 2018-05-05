@@ -14,13 +14,13 @@ export default ({match}) => ($state, $actions) => {
 		if(commentTa.value !== ""){
 			$actions.hw_manager.sendComment({
 				callback: (e, r)=>{
-					actions.updateIsCommentSending(false);
+					actions.updateIsSendingComment(false);
 				},
 				comment: commentTa.value,
 				hwid    : hw.id,
 			});
 			commentTa.value = "";
-			actions.updateIsCommentSending(true);
+			actions.updateIsSendingComment(true);
 		}
 	}
 	function onRemoveBtnClick(e){
@@ -31,11 +31,11 @@ export default ({match}) => ($state, $actions) => {
 				if(!e){
 					location.actions.go("/");
 				}
-				actions.updateIsHomeworkRemoving(false);
+				actions.updateIsRemovingHomework(false);
 			},
 			hw,
 		});
-		actions.updateIsHomeworkRemoving(true);
+		actions.updateIsRemovingHomework(true);
 	}
 
 	if(!hw){
@@ -59,7 +59,7 @@ export default ({match}) => ($state, $actions) => {
 				<div className="control">
 					<HwCardBtn
 						className="removebtn"
-						loading={state.isHomeworkRemoving}
+						loading={state.isRemovingHomework}
 						onclick={(e)=>onRemoveBtnClick(e, hw)}
 					>
 							削除
@@ -87,8 +87,8 @@ export default ({match}) => ($state, $actions) => {
 			<div className="hwcard-commentinput">
 				<HwCardBtn
 					stretch
-					disabled={state.isHomeworkRemoving}
-					loading={state.isCommentSending}
+					disabled={state.isRemovingHomework}
+					loading={state.isSendingComment}
 					onclick={(e)=>onCommentSendBtnClick(e)}
 				>
 						コメント送信

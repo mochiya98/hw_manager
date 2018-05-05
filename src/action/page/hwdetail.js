@@ -1,8 +1,8 @@
 export default {
-	updateIsCommentSending: value => (state, actions) => {
-		return {isCommentSending: value};
+	updateIsSendingComment: value => (state, actions) => {
+		return {isSendingComment: value};
 	},
-	updateIsHomeworkRemoving: value => (state, actions) => {
-		return {isHomeworkRemoving: value};
+	updateIsRemovingHomework: value => (state, actions) => {
+		return {isRemovingHomework: value};
 	},
 };
