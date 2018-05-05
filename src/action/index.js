@@ -8,4 +8,5 @@ export default {
 	location: location.actions,
 	page,
 	hw_manager,
+	render  : ()=>({}),
 };
