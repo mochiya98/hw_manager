@@ -5,6 +5,7 @@
 	"author": "Yukimasa Funaoka <yukimasafunaoka@gmail.com>",
 	"main": "webpack.config.js",
 	"dependencies": {
+		"classnames": "^2.2.5",
 		"htmlspecialchars": "^1.0.5",
 		"hyperapp": "^1.2.5",
 		"hyperapp-hash-router": "^0.1.0",

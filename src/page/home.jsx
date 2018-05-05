@@ -5,11 +5,12 @@ import HwCardTiny from "component/hwcardtiny";
 import {generateUuid} from "util/generateuuid";
 import ScopeSelector from "component/scope-selector";
 
-export default () => (state, actions) => {
-	const tstate = state.page.home;
-	const tactions = actions.page.home;
+export default () => ($state, $actions) => {
+	const state = $state.page.home;
+	const actions = $actions.page.home;
 	function onScopeChange(selected_scope){
-		tactions.updateCurrentScope(selected_scope);
+		if(DEBUG) console.log(`onScopeChange: ${selected_scope}`);
+		actions.updateCurrentScope(selected_scope);
 	}
 	function onAddButtonClick(){
 		location.actions.go("/hws/" + generateUuid() + "/edit");
@@ -17,7 +18,7 @@ export default () => (state, actions) => {
 	return (
 		<div class="page-home">
 			<ScopeSelector
-				current={tstate.current_scope}
+				current={state.currentScope}
 				onchange={onScopeChange}
 				sid="hws_type"
 				scopes={[
@@ -32,20 +33,20 @@ export default () => (state, actions) => {
 				]}
 			/>
 			{(() => {
-				if(tstate.current_scope === "hws_future"){
+				if(state.currentScope === "hws_future"){
 					return (
 						<ul class="hwlist">
-							{state.hw_manager.hws_future
+							{$state.hw_manager.hws_future
 								.sort((a, b)=>Math.sign(a.expire - b.expire))
 								.map((hw) => (
 									<li><HwCardTiny hw={hw} /></li>
 								))}
 						</ul>
 					);
-				}else if(tstate.current_scope === "hws_expired"){
+				}else if(state.currentScope === "hws_expired"){
 					return (
 						<ul class="hwlist">
-							{state.hw_manager.hws_expired
+							{$state.hw_manager.hws_expired
 								.sort((a, b)=>Math.sign(b.expire - a.expire))
 								.map((hw) => (
 									<li><HwCardTiny hw={hw} /></li>

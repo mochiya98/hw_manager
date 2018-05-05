@@ -1,7 +1,7 @@
 import {h} from "hyperapp";
 import classNames from "classnames";
 
-export default ({loading, disabled, stretch, className, ...args}, children) => (state, actions) => (
+export default ({loading, disabled, stretch, className, ...args}, children) => ($state, $actions) => (
 	<button
 		className={classNames(
 			"hwcard-btn",

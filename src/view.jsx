@@ -2,7 +2,7 @@ import {h} from "hyperapp";
 import {Route, Switch} from "hyperapp-hash-router";
 
 import PageHome from "page/home";
-import PageHw from "page/hw";
+import PageHwDetail from "page/hwdetail";
 import PageHwEdit from "page/hwedit";
 
 export default (state, actions) => (
@@ -17,7 +17,7 @@ export default (state, actions) => (
 				: (
 					<Switch>
 						<Route parent path="/hws/:hw_id/edit" render={PageHwEdit} />
-						<Route parent path="/hws/:hw_id" render={PageHw} />
+						<Route parent path="/hws/:hw_id" render={PageHwDetail} />
 						<Route path="/" render={PageHome} />
 					</Switch>
 				)

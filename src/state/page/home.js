@@ -1,3 +1,3 @@
 export default {
-	current_scope: "hws_future",
+	currentScope: "hws_future",
 };

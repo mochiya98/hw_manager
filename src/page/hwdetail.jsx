@@ -4,25 +4,42 @@ import {location} from "hyperapp-hash-router";
 import HwCardBase from "component/hwcardbase";
 import HwCardBtn from "component/hwcardbtn";
 
-function onCommentSendBtnClick(e, hw, actions){
-	const hwcard = e.target.parentNode.parentNode;
-	const commentTa = hwcard.getElementsByClassName("hwcard-comment-ta")[0];
-	actions.hw_manager.sendComment({
-		comment: commentTa.value,
-		hwid   : hw.id,
-	});
-	commentTa.value = "";
-}
+export default ({match}) => ($state, $actions) => {
+	const state = $state.page.hwdetail;
+	const actions = $actions.page.hwdetail;
+	const hw = $state.hw_manager.hws[match.params.hw_id];
+	function onCommentSendBtnClick(event){
+		const hwcard = event.target.parentNode.parentNode;
+		const commentTa = hwcard.getElementsByClassName("hwcard-comment-ta")[0];
+		if(commentTa.value !== ""){
+			$actions.hw_manager.sendComment({
+				callback: (e, r)=>{
+					actions.updateIsCommentSending(false);
+				},
+				comment: commentTa.value,
+				hwid    : hw.id,
+			});
+			commentTa.value = "";
+			actions.updateIsCommentSending(true);
+		}
+	}
+	function onRemoveBtnClick(e){
+		if(!confirm("本当にこの課題を削除しますか？"))return;
+		if(!confirm("本当に本当に、この課題を削除しますか？"))return;
+		$actions.hw_manager.removeHw({
+			callback: (e, r)=>{
+				if(!e){
+					location.actions.go("/");
+				}
+				actions.updateIsHomeworkRemoving(false);
+			},
+			hw,
+		});
+		actions.updateIsHomeworkRemoving(true);
+	}
 
-function onRemoveBtnClick(e, hw, actions){
-	if(!confirm("本当にこの課題を削除しますか？"))return;
-	if(!confirm("本当に本当に、この課題を削除しますか？"))return;
-	actions.hw_manager.removeHw(hw);
-}
-
-export default ({hw}) => {
 	if(!hw){
-		return (state, actions) => (
+		return (
 			<div className="hwcard">
 				<p>削除済みの課題です</p>
 				<div className="hwcard-historyback">
@@ -30,27 +47,28 @@ export default ({hw}) => {
 						className="hwcard-btn hwcard-btn--stretch"
 						onclick={()=>history.back()}
 					>
-						前のページに戻る
+							前のページに戻る
 					</button>
 				</div>
 			</div>
 		);
 	}
-	return (state, actions) => (
+	return (
 		<HwCardBase hw={hw}>
 			<div className="hwcard-fulldesc">
 				<div className="control">
 					<HwCardBtn
 						className="removebtn"
-						onclick={(e)=>onRemoveBtnClick(e, hw, actions)}
+						loading={state.isHomeworkRemoving}
+						onclick={(e)=>onRemoveBtnClick(e, hw)}
 					>
-						削除
+							削除
 					</HwCardBtn>
 					<HwCardBtn
 						className="editbtn"
 						onclick={()=>location.actions.go("/hws/" + hw.id + "/edit")}
 					>
-						編集
+							編集
 					</HwCardBtn>
 				</div>
 				<div className="s_code">{hw.s_code}</div>
@@ -69,9 +87,10 @@ export default ({hw}) => {
 			<div className="hwcard-commentinput">
 				<HwCardBtn
 					stretch
-					onclick={(e)=>onCommentSendBtnClick(e, hw, actions)}
+					loading={state.isCommentSending}
+					onclick={(e)=>onCommentSendBtnClick(e)}
 				>
-					コメント送信
+						コメント送信
 				</HwCardBtn>
 			</div>
 			<hr />
@@ -80,7 +99,7 @@ export default ({hw}) => {
 					stretch
 					onclick={()=>history.back()}
 				>
-					前のページに戻る
+						前のページに戻る
 				</HwCardBtn>
 			</div>
 		</HwCardBase>

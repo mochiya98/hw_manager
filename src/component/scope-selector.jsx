@@ -1,6 +1,6 @@
 import {h} from "hyperapp";
 
-export default ({scopes, onchange, current, sid, ...args}, children) => (state, actions) => {
+export default ({scopes, onchange, current, sid, ...args}, children) => ($state, $actions) => {
 	if(!sid){
 		sid = Math.random().toString(36).slice(2);
 	}

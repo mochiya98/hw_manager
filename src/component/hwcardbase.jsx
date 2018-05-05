@@ -6,11 +6,11 @@ import {
 	getAbsoluteDateState,
 } from "util/dateparser";
 
-export default ({hw, ...args}, children) => (state, actions) => (
+export default ({hw, ...args}, children) => ($state, $actions) => (
 	<div
 		className="hwcard"
 		style={{
-			borderColor: getRelativeDateState_markcolor(hw.expire, state.now),
+			borderColor: getRelativeDateState_markcolor(hw.expire, $state.now),
 		}}
 		{...args}
 	>

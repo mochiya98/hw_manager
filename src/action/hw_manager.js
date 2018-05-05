@@ -22,7 +22,7 @@ export default {
 			actions.updateHws(r);
 		});
 	},
-	removeHw: (hw) => ({hws}, actions) => {
+	removeHw: ({hw, callback}) => ({hws}, actions) => {
 		if(DEBUG) console.log("removeHw", hw);
 
 		api.post(`/hws/${hw.id}`, {_method: "DELETE"}, (e, r)=>{
@@ -34,10 +34,10 @@ export default {
 				location.actions.go("/");
 			}
 			actions.updateHws(hws);
+			if(callback) callback(e || hasError, r);
 		});
-		return {loading: true};
 	},
-	sendComment: ({hwid, comment}) => ({hws, hws_future, hws_expired}, actions) => {
+	sendComment: ({hwid, comment, callback}) => ({hws, hws_future, hws_expired}, actions) => {
 		if(DEBUG) console.log("sendComment", hwid, comment);
 		if(typeof hwid === "object")hwid = hwid.id;
 		if(!comment)return;
@@ -58,10 +58,10 @@ export default {
 				});
 			}
 			actions.updateHws(hws);
+			if(callback) callback(e || hasError, r);
 		});
-		return {loading: true};
 	},
-	sendEdit: (hw) => ({hws}, actions) => {
+	sendEdit: ({hw, callback}) => ({hws}, actions) => {
 		if(DEBUG) console.log("sendEdit", hw);
 
 		const {id, s_code, no, title, expire} = hw;
@@ -78,12 +78,10 @@ export default {
 
 			if(!hasError){
 				hws[hw.id] = hw;
-				location.actions.go("/");
 			}
 			actions.updateHws(hws);
+			if(callback) callback(e || hasError, r);
 		});
-		console.log("loading!");
-		return {loading: true};
 	},
 	updateHws: (hws_list) => state => {
 		const hws = {},
