@@ -280,7 +280,10 @@ body{
 .hwcard-btn--stretch{
 	width:100%;
 }
-.hwcard-btn--loading, .hwcard-btn--loading:hover{
+.hwcard-btn:disabled{
+	cursor:default;
+}
+.hwcard-btn:disabled, .hwcard-btn:disabled:hover{
 	background-color:#f6f9f6;
 	color:#999;
 }
