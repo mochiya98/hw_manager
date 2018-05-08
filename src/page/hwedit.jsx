@@ -19,14 +19,19 @@ export default ({match}) => ($state, $actions) => {
 	let elNoInput;
 	let elTitleInput;
 	let elDateInput;
-	hw = hw ? hw : {
-		comments: [],
-		expire  : getTodayDate() + 7,
-		id      : hwid,
-		no      : 1,
-		s_code  : "IW31",
-		title   : "",
-	};
+	if(state.sendingHw){
+		hw = state.sendingHw;
+	}
+	if(!hw){
+		hw = {
+			comments: [],
+			expire  : getTodayDate() + 7,
+			id      : hwid,
+			no      : 1,
+			s_code  : "IW31",
+			title   : "",
+		};
+	}
 	const si = subjectList.indexOf(hw.s_code);
 
 	function initElSCodeInput(e){
@@ -68,7 +73,9 @@ export default ({match}) => ($state, $actions) => {
 		const no = no_txt * 1;
 		if(!(no >= 1 && no <= 99)){
 			notifier.Show("課題番号は1~99で入力して下さい", "error");
+			return;
 		}
+		console.log(no);
 		if(date_txt === ""){
 			notifier.Show("期限が入力されていません", "error");
 			return;
@@ -88,83 +95,91 @@ export default ({match}) => ($state, $actions) => {
 				if(!e){
 					location.actions.go("/");
 				}
+				actions.updateSendingHw(null);
 				actions.updateIsSending(false);
-				$actions.render();
 			},
 			hw,
 		});
+		actions.updateSendingHw(hw);
 		actions.updateIsSending(true);
-		$actions.render();
 	}
 	return (
-		<div className="hwcard">
-			<h2>課題の登録/編集</h2>
-			<div className="hwcard-editpanel">
-				<h3>科目記号</h3>
-				<div className="hwedit-scodeform">
-					<select
-						selectedIndex={si !== -1 ? si : subjectList.length}
-						onchange={onSCodeSelectUpdate}
-					>
-						{subjectList.map((val)=>(
-							<option value={val}>{val}</option>
-						))}
-						<option value="">その他</option>
-					</select>
+		<div class="page-hwedit" data-test="page-hwedit">
+			<div className="hwcard">
+				<h2>課題の登録/編集</h2>
+				<div className="hwcard-editpanel">
+					<h3>科目記号</h3>
+					<div className="hwedit-scodeform">
+						<select
+							selectedIndex={si !== -1 ? si : subjectList.length}
+							onchange={onSCodeSelectUpdate}
+							data-test="hwedit-scode-select"
+						>
+							{subjectList.map((val)=>(
+								<option value={val}>{val}</option>
+							))}
+							<option value="">その他</option>
+						</select>
+						<input
+							className="hwedit-scodeinput"
+							value={hw.s_code}
+							disabled={si !== -1}
+							oncreate={initElSCodeInput}
+							onupdate={initElSCodeInput}
+							data-test="hwedit-scode-input"
+						/>
+					</div>
+					<h3>課題番号</h3>
 					<input
-						className="hwedit-scodeinput"
-						value={hw.s_code}
-						disabled={si !== -1}
-						oncreate={initElSCodeInput}
-						onupdate={initElSCodeInput}
+						className="hwedit-noinput"
+						style={{width: "100%"}}
+						type="number"
+						min="1"
+						max="99"
+						value={hw.no}
+						oncreate={initElNoInput}
+						onupdate={initElNoInput}
+						data-test="hwedit-no-input"
+					/>
+					<h3>主題</h3>
+					<input
+						className="hwedit-titleinput"
+						style={{width: "100%"}}
+						value={hw.title}
+						oncreate={initElTitleInput}
+						onupdate={initElTitleInput}
+						data-test="hwedit-title-input"
+					/>
+					<h3>期限</h3>
+					<input
+						className="hwedit-dateinput"
+						type="date"
+						pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+						value={getAbsoluteDateState(hw.expire, "-")}
+						oncreate={initElDateInput}
+						onupdate={initElDateInput}
+						data-test="hwedit-date-input"
 					/>
 				</div>
-				<h3>課題番号</h3>
-				<input
-					className="hwedit-noinput"
-					style={{width: "100%"}}
-					type="number"
-					min="1"
-					max="99"
-					value={hw.no}
-					oncreate={initElNoInput}
-					onupdate={initElNoInput}
-				/>
-				<h3>主題</h3>
-				<input
-					className="hwedit-titleinput"
-					style={{width: "100%"}}
-					value={hw.title}
-					oncreate={initElTitleInput}
-					onupdate={initElTitleInput}
-				/>
-				<h3>期限</h3>
-				<input
-					className="hwedit-dateinput"
-					type="date"
-					pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
-					value={getAbsoluteDateState(hw.expire, "-")}
-					oncreate={initElDateInput}
-					onupdate={initElDateInput}
-				/>
-			</div>
-			<div className="hwcard-editcp">
-				<HwCardBtn
-					loading={state.isSending}
-					stretch
-					onclick={(e)=>onSaveButtonClick(e)}
-				>
-					保存する
-				</HwCardBtn>
-			</div>
-			<hr />
-			<div className="hwcard-historyback">
-				<HwCardBtn
-					stretch
-					onclick={()=>history.back()}
-				>
-					前のページに戻る
-				</HwCardBtn>
+				<div className="hwcard-editcp">
+					<HwCardBtn
+						loading={state.isSending}
+						stretch
+						onclick={(e)=>onSaveButtonClick(e)}
+						data-test="hwedit-savebtn"
+					>
+						保存する
+					</HwCardBtn>
+				</div>
+				<hr />
+				<div className="hwcard-historyback">
+					<HwCardBtn
+						stretch
+						onclick={()=>history.back()}
+					>
+						前のページに戻る
+					</HwCardBtn>
+				</div>
 			</div>
 		</div>
 	);

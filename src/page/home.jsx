@@ -2,7 +2,7 @@ import {h} from "hyperapp";
 import {location} from "hyperapp-hash-router";
 
 import HwCardTiny from "component/hwcardtiny";
-import {generateUuid} from "util/generateuuid";
+import generateUuid from "util/generateuuid";
 import ScopeSelector from "component/scope-selector";
 
 export default () => ($state, $actions) => {
@@ -16,7 +16,7 @@ export default () => ($state, $actions) => {
 		location.actions.go("/hws/" + generateUuid() + "/edit");
 	}
 	return (
-		<div class="page-home">
+		<div class="page-home" data-test="page-home">
 			<ScopeSelector
 				current={state.currentScope}
 				onchange={onScopeChange}
@@ -31,11 +31,12 @@ export default () => ($state, $actions) => {
 						label: "期限切れ",
 					},
 				]}
+				data-test="home-ss-hws_type"
 			/>
 			{(() => {
 				if(state.currentScope === "hws_future"){
 					return (
-						<ul class="hwlist">
+						<ul class="hwlist" data-test="home-hwlist">
 							{$state.hw_manager.hws_future
 								.sort((a, b)=>Math.sign(a.expire - b.expire))
 								.map((hw) => (
@@ -45,7 +46,7 @@ export default () => ($state, $actions) => {
 					);
 				}else if(state.currentScope === "hws_expired"){
 					return (
-						<ul class="hwlist">
+						<ul class="hwlist" data-test="home-hwlist">
 							{$state.hw_manager.hws_expired
 								.sort((a, b)=>Math.sign(b.expire - a.expire))
 								.map((hw) => (
@@ -55,7 +56,12 @@ export default () => ($state, $actions) => {
 					);
 				}
 			})()}
-			<div class="addbtn" onclick={onAddButtonClick}></div>
+			<div
+				class="addbtn"
+				onclick={onAddButtonClick}
+				data-test="home-hw-addbtn"
+			>
+			</div>
 		</div>
 	);
 };

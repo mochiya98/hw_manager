@@ -9,7 +9,7 @@ export default (state, actions) => (
 	<div id="container">
 		<header>
 			<h1>HW Manager v.0.1a</h1>
-			<div id="notify-popup"></div>
+			<div id="notify-popup" data-test="notify-popup"></div>
 		</header>
 		<main>
 			{()=>(state.hw_manager.loading

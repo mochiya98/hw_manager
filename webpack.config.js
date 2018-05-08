@@ -9,6 +9,7 @@ const config = require("./config.js");
 
 module.exports = (env, argv) => {
 	if(!argv.mode)argv.mode = "development";
+	process.env.NODE_ENV = argv.mode;
 	var config_current = config[argv.mode];
 	
 	var define = config_current.define ? config_current.define : {};

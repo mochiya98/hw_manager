@@ -17,7 +17,7 @@ module.exports = {
 			"objectLiteralShorthandMethods": true,
 			"experimentalObjectRestSpread" : true,
 		},
-		"ecmaVersion": 2017,
+		"ecmaVersion": 2018,
 		"sourceType" : "module",
 	},
 	"plugins": [
@@ -61,7 +61,7 @@ module.exports = {
 		"no-undef-init"             : ["error"],
 		"no-undefined"              : ["warn"],
 		"no-unused-vars"            : ["error", {"args": "none"}],
-		"no-use-before-define"      : ["error"],
+		"no-use-before-define"      : ["warn"],
 
 		"array-bracket-newline"    : ["error", "consistent"],
 		"array-bracket-spacing"    : ["error", "never"],
@@ -132,7 +132,7 @@ module.exports = {
 		"react/jsx-filename-extension" : ["error"],
 		"react/jsx-first-prop-new-line": ["error", "multiline-multiprop"],
 		"react/jsx-handler-names"      : ["off"],
-		"react/jsx-indent"             : ["error", "tab"],
+		"react/jsx-indent"             : ["off", "tab"],//ESLintのタブ処理に任せる
 		"react/jsx-indent-props"       : ["error", "tab"],
 		"react/jsx-key"                : ["off"],
 		"react/jsx-max-depth"          : ["off"],

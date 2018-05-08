@@ -14,7 +14,7 @@ export default ({scopes, onchange, current, sid, ...args}, children) => ($state,
 	}
 	let inputid_count = 0;
 	return (
-		<form oncreate={initElForm} onupdate={initElForm}>
+		<form oncreate={initElForm} onupdate={initElForm} {...args}>
 			<ul class="scope_bar">
 				{scopes.map(({id, label})=>(
 					<li>
@@ -26,7 +26,12 @@ export default ({scopes, onchange, current, sid, ...args}, children) => ($state,
 							value={id}
 							onchange={onScopeChange}
 						/>
-						<label for={sid + inputid_count}>{label}</label>
+						<label
+							for={sid + inputid_count}
+							data-test={"ss-label-" + id}
+						>
+							{label}
+						</label>
 					</li>
 				))}
 			</ul>

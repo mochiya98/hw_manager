@@ -159,14 +159,17 @@ body{
 	padding:5px;
 	color:#fff;
 	position:fixed;
-	top:-36px;
+	top:0;
 	left:0;
+	transform:translateY(-100%);
 	width:100%;
-	transition:top .2s ease;
+	visibility:hidden;
+	transition:transform .2s ease, visibility .2s ease;
 	z-index:10000;
 }
 #container>header>#notify-popup.disp{
-	top:0;
+	transform:unset;
+	visibility:visible;
 }
 #container>header>#notify-popup.info{
 	background-color:#0084d1;

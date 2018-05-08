@@ -5,7 +5,7 @@ import htmlspecialchars from "htmlspecialchars";
 import notifier from "util/notifier";
 import ApiCaller from "util/apicaller";
 import {getTodayDate} from "util/dateparser";
-import {generateUuid} from "util/generateuuid";
+import generateUuid from "util/generateuuid";
 
 const api = new ApiCaller(API_ENDPOINT);
 

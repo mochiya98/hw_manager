@@ -21,9 +21,18 @@ class HWMNotifier{
 		this.e.classList.add("disp");
 		
 		clearInterval(this.k);
+
+		let timeout = 1000 * 3;
+
+		if(DEBUG){//DEBUGと他の条件をANDしないで
+			if(window._testSelector){
+				timeout = 300;
+			}
+		}
+
 		this.k = setTimeout(()=>{
 			this.e.classList.remove("disp");
-		}, 1000 * 3);
+		}, timeout);
 	}
 	t(msg_tiny, flg){
 		return this.Show(

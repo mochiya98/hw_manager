@@ -15,10 +15,10 @@ export default ({hw, ...args}, children) => ($state, $actions) => (
 		{...args}
 	>
 		<div className="hwcard-exp">
-			<p className="exp-rday">
+			<p className="exp-rday" data-test="hwcardbase-exp-rday">
 				{getRelativeDateState(hw.expire)}
 			</p>
-			<p className="exp-aday">
+			<p className="exp-aday" data-test="hwcardbase-exp-aday">
 				{()=>getAbsoluteDateState(hw.expire, {addDay: true})}
 			</p>
 		</div>
