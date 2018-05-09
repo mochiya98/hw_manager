@@ -1,6 +1,6 @@
 import querystring from "querystring";
 
-export default class {
+class ApiCaller{
 	constructor(arg_endpoint){
 		this.endpoint = arg_endpoint;
 	}
@@ -43,3 +43,4 @@ export default class {
 		this._gen(path, params, callback, "POST");
 	}
 }
+export default ApiCaller;

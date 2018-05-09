@@ -8,7 +8,7 @@ import {
 	unixtime2date,
 } from "util/dateparser";
 import notifier from "util/notifier";
-import HwCardBtn from "component/hwcardbtn";
+import HwCardBtn from "component/hw_card_btn";
 
 export default ({match}) => ($state, $actions) => {
 	const state = $state.page.hwedit;
@@ -109,11 +109,11 @@ export default ({match}) => ($state, $actions) => {
 				<h2>課題の登録/編集</h2>
 				<div className="hwcard-editpanel">
 					<h3>科目記号</h3>
-					<div className="hwedit-scodeform">
+					<div className="hwedit-s_code-form">
 						<select
 							selectedIndex={si !== -1 ? si : subjectList.length}
 							onchange={onSCodeSelectUpdate}
-							data-test="hwedit-scode-select"
+							data-test="hwedit-s_code-select"
 						>
 							{subjectList.map((val)=>(
 								<option value={val}>{val}</option>
@@ -121,12 +121,12 @@ export default ({match}) => ($state, $actions) => {
 							<option value="">その他</option>
 						</select>
 						<input
-							className="hwedit-scodeinput"
+							className="hwedit-s_code-input"
 							value={hw.s_code}
 							disabled={si !== -1}
 							oncreate={initElSCodeInput}
 							onupdate={initElSCodeInput}
-							data-test="hwedit-scode-input"
+							data-test="hwedit-s_code-input"
 						/>
 					</div>
 					<h3>課題番号</h3>

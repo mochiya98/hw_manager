@@ -1,8 +1,8 @@
 import {h} from "hyperapp";
 import {location} from "hyperapp-hash-router";
 
-import HwCardBase from "component/hwcardbase";
-import HwCardBtn from "component/hwcardbtn";
+import HwCardBase from "component/hw_card_base";
+import HwCardBtn from "component/hw_card_btn";
 
 export default ({match}) => ($state, $actions) => {
 	const state = $state.page.hwdetail;
@@ -76,21 +76,21 @@ export default ({match}) => ($state, $actions) => {
 								編集
 						</HwCardBtn>
 					</div>
-					<div className="s_code" data-test="hwdetail-scode">{hw.s_code}</div>
+					<div className="s_code" data-test="hwdetail-s_code">{hw.s_code}</div>
 					<div className="no" data-test="hwdetail-no">No.{hw.no}</div>
 					<h1 className="title" data-test="hwdetail-title">{hw.title}</h1>
 				</div>
 				<hr />
-				<ul className="hwcard-commentlist" data-test="hwdetail-comments">
+				<ul className="hwcard-comment_list" data-test="hwdetail-comments">
 					{hw.comments.map((comment)=>(
 						<li innerHTML={comment.value.replace(/\n/g, "<br>")}></li>
 					))}
 				</ul>
-				<div className="hwcard-commentinput">
+				<div className="hwcard-comment_input">
 					<textarea
 						rows={4}
 						className="hwcard-comment-ta"
-						data-test="hwdetail-comment-input"
+						data-test="hwdetail-comment_input__input"
 					>
 					</textarea>
 					<HwCardBtn
@@ -98,7 +98,7 @@ export default ({match}) => ($state, $actions) => {
 						disabled={state.isRemovingHomework}
 						loading={state.isSendingComment}
 						onclick={(e)=>onCommentSendBtnClick(e)}
-						data-test="hwdetail-comment-sendbtn"
+						data-test="hwdetail-comment_input__sendbtn"
 					>
 							コメント送信
 					</HwCardBtn>

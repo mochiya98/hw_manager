@@ -1,7 +1,7 @@
 import {h} from "hyperapp";
 import {location} from "hyperapp-hash-router";
 
-import HwCardBase from "./hwcardbase";
+import HwCardBase from "./hw_card_base";
 
 export default ({hw}) => ($state, $actions) => (
 	<HwCardBase

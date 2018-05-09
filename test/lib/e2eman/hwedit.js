@@ -1,4 +1,4 @@
-const generateUuid = require("../generateuuid");
+const generateUuid = require("../generate_uuid");
 
 const {_testSelector, assertValue, gotoHash, clearValue, setValue, typeAfterClear, waitForNotify, waitFrame} = require("../common");
 
@@ -24,7 +24,7 @@ class E2EMan_HwEdit{
 			...dummyHwInp,
 			...hwdisp,
 		});
-		await assertValue(this.page, _testSelector("hwedit-scode-input"), hwdisp.s_code);
+		await assertValue(this.page, _testSelector("hwedit-s_code-input"), hwdisp.s_code);
 		await assertValue(this.page, _testSelector("hwedit-no-input"), hwdisp.no);
 		await assertValue(this.page, _testSelector("hwedit-title-input"), hwdisp.title);
 		await assertValue(this.page, _testSelector("hwedit-date-input"), hwdisp.date);
@@ -34,8 +34,8 @@ class E2EMan_HwEdit{
 			...dummyHwInp,
 			...hwdisp,
 		});
-		await this.page.select(_testSelector("hwedit-scode-select"), "");
-		await typeAfterClear(this.page, _testSelector("hwedit-scode-input"), hwdisp.s_code);
+		await this.page.select(_testSelector("hwedit-s_code-select"), "");
+		await typeAfterClear(this.page, _testSelector("hwedit-s_code-input"), hwdisp.s_code);
 		await typeAfterClear(this.page, _testSelector("hwedit-no-input"), hwdisp.no);
 		await typeAfterClear(this.page, _testSelector("hwedit-title-input"), hwdisp.title);
 		await clearValue(this.page, _testSelector("hwedit-date-input"));
@@ -48,11 +48,11 @@ class E2EMan_HwEdit{
 	}
 	async testSCodeSelect(sel_val, inp_val, disabled){
 		await this.goto();
-		await this.page.select(_testSelector("hwedit-scode-select"), sel_val);
+		await this.page.select(_testSelector("hwedit-s_code-select"), sel_val);
 		// eslint-disable-next-line no-shadow
 		while(!await this.page.evaluate(async function({disabled, inp_val}){
 			let elInp = document.querySelector(
-				await _testSelector("hwedit-scode-input")
+				await _testSelector("hwedit-s_code-input")
 			);
 			return elInp && elInp.value === inp_val && !!elInp.disabled === disabled;
 		}, {disabled, inp_val}))await waitFrame();

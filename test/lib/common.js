@@ -1,37 +1,10 @@
-const fs = require("fs");
-const url = require("url");
-const path = require("path");
 const {strict:assert} = require("assert");
 
-const mime = require("mime");
 const devices = require("puppeteer/DeviceDescriptors");
 
-const useRequestStub = true;
-const stubHws = {
-	"result": {
-		"00000000-0000-4000-8000-000000000000": {
-			"id"      : "00000000-0000-4000-8000-000000000000",
-			"no"      : 44,
-			"s_code"  : "ST3E",
-			"title"   : "スタブ未来課題",
-			"expire"  : 18397,
-			"comments": [
-				{
-					"id"   : "11111111-0000-4000-8000-000000000000",
-					"value": "スタブコメント",
-				},
-			],
-		},
-		"00000000-0000-4000-8000-111111111111": {
-			"id"      : "00000000-0000-4000-8000-111111111111",
-			"no"      : 33,
-			"s_code"  : "ST3S",
-			"title"   : "スタブ過去課題",
-			"expire"  : 16801,
-			"comments": [],
-		},
-	},
-};
+const requestInterceptor = require("./request_interceptor.js");
+
+const useRequestInterceptor = true;
 
 function _testSelector(id){
 	return `[data-test="${id}"]`;
@@ -41,7 +14,7 @@ async function newPage(browser){
 	let page = await browser.newPage();
 	let device = devices["Nexus 5"];
 	await page.emulate(device);
-	/*const {targetInfos: [{targetId}]} =
+	const {targetInfos: [{targetId}]} =
 		await browser._connection.send("Target.getTargets");
 	const {windowId} =
 		await browser._connection.send(
@@ -56,66 +29,11 @@ async function newPage(browser){
 			},
 			windowId,
 		}
-	);*/
+	);
 	await page.exposeFunction("_testSelector", _testSelector);
-	if(useRequestStub){
+	if(useRequestInterceptor){
 		await page.setRequestInterception(true);
-		page.on("request", req => {
-			const r_url = new url.URL(req.url());
-			const method = req.method();
-			if(req.resourceType() !== "xhr"){
-				if(r_url.host === "127.0.0.1"){
-					if(r_url.pathname[r_url.pathname.length - 1] === "/"){
-						r_url.pathname += "index.html";
-					}
-					const filepath = path.resolve("./dist/", "." + r_url.pathname);
-					try{
-						const body = fs.readFileSync(filepath);
-						req.respond({
-							body,
-							contentType: mime.getType(filepath),
-							headers    : {
-								"Access-Control-Allow-Origin": "*",
-							},
-							status: 200,
-						});
-						return;
-					}catch(e){}
-				}
-				req.continue();
-				return;
-			}
-			if(method === "GET" && r_url.pathname.endsWith("/hws")){
-				req.respond({
-					body       : JSON.stringify(stubHws),
-					contentType: "application/json",
-					headers    : {
-						"Access-Control-Allow-Origin": "*",
-					},
-					status: 200,
-				});
-				return;
-			}
-			if(
-				(method === "POST" && r_url.pathname.match(/\/hws\/[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/))
-				|| (method === "POST" && r_url.pathname.match(/\/hws\/[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\/edit$/))
-			){
-				req.respond({
-					body: JSON.stringify({
-						"result": {
-							"status": "ok",
-						},
-					}),
-					contentType: "application/json",
-					headers    : {
-						"Access-Control-Allow-Origin": "*",
-					},
-					status: 200,
-				});
-				return;
-			}
-			req.continue();
-		});
+		page.on("request", requestInterceptor);
 	}
 	return page;
 }

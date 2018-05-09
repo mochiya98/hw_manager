@@ -3,9 +3,9 @@ import {location} from "hyperapp-hash-router";
 import htmlspecialchars from "htmlspecialchars";
 
 import notifier from "util/notifier";
-import ApiCaller from "util/apicaller";
+import ApiCaller from "util/api_caller";
 import {getTodayDate} from "util/dateparser";
-import generateUuid from "util/generateuuid";
+import generateUuid from "util/generate_uuid";
 
 const api = new ApiCaller(API_ENDPOINT);
 

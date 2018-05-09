@@ -1,10 +1,10 @@
-import apicaller from "apicaller";
+import ApiCaller from "api_caller";
 import dateparser from "dateparser";
-import generateuuid from "generateuuid";
+import generateUuid from "generate_uuid";
 import notifier from "notifier";
 export {
-	apicaller,
+	ApiCaller,
 	dateparser,
-	generateuuid,
+	generateUuid,
 	notifier,
 };

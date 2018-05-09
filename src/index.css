@@ -191,22 +191,22 @@ body{
 .hwcard>*{
 	margin:7px 0;
 }
-.hwcard .hwcard-exp>*{
+.hwcard-exp>*{
 	font-size:16px;
 	display:inline-block;
 	padding-right:10px;
 	color:#444;
 }
-.hwcard .hwcard-tinydesc{
+.hwcard-tinydesc{
 	margin:2px 0;
 	position:relative;
 	top:0;
 	left:0;
 	padding-left:100px;
 }
-.hwcard .hwcard-tinydesc>*{
+.hwcard-tinydesc>*{
 }
-.hwcard .hwcard-tinydesc .s_code{
+.hwcard-tinydesc .s_code{
 	font-size:24px;
 	font-weight:bold;
 	position:absolute;top:0;left:0;
@@ -221,47 +221,47 @@ body{
 	justify-content: center;
 	vertical-align: middle;
 }
-.hwcard .hwcard-tinydesc .title{
+.hwcard-tinydesc .title{
 	font-size:20px;
 	font-weight:normal;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-.hwcard .hwcard-fulldesc{
+.hwcard-fulldesc{
 	position:relative;
 	top:0;
 	left:0;
 }
-.hwcard .hwcard-fulldesc .control{
+.hwcard-fulldesc .control{
 	position:absolute;
 	top:0;
 	right:0;
 }
-.hwcard .hwcard-fulldesc .control>*{
+.hwcard-fulldesc .control>*{
 	margin-left:5px;
 }
-.hwcard .hwcard-fulldesc .s_code{
+.hwcard-fulldesc .s_code{
 	font-size:27px;
 	line-height:1.5;
 	font-weight:bold;
 }
-.hwcard .hwcard-fulldesc .title{
+.hwcard-fulldesc .title{
 	font-size:20px;
 	font-weight:normal;
 	word-wrap:break-word;
 }
-.hwcard .hwcard-commentlist,
-.hwcard .hwcard-commentinput{
+.hwcard-comment_list,
+.hwcard-comment_input{
 	margin:10px 0;
 }
-.hwcard .hwcard-commentlist li{
+.hwcard-comment_list li{
 	margin:5px 0;
 	padding:0 5px;
 	border-left:4px solid #ccc;
 	color:#444;
 }
-.hwcard .hwcard-commentinput textarea{
+.hwcard-comment_input textarea{
 	width:calc(100% - 12px);
 }
 .hwcard-btn{
@@ -315,7 +315,7 @@ body{
 .hwcard-editpanel h3{
 	line-height:1.8;
 }
-.hwedit-scodeform input,.hwedit-scodeform select{
+.hwedit-s_code-form input,.hwedit-s_code-form select{
 	width:6em;
 }
 

@@ -1,0 +1,1 @@
+(async()=>await require('puppeteer').launch({headless:!1}))();

@@ -1,4 +1,4 @@
-const generateUuid = require("../generateuuid");
+const generateUuid = require("../generate_uuid");
 
 const {_testSelector, assertTextContent, getTextContent, gotoHash, overrideDialogMethods, typeAfterClear, waitForNotify, waitFrame} = require("../common");
 const {strict:assert} = require("assert");
@@ -15,10 +15,10 @@ class E2EMan_HwDetail{
 		await this.page.waitForSelector(_testSelector("page-hwdetail"));
 	}
 	async assert(hwdisp = {}){
-		await assertTextContent(this.page, _testSelector("hwdetail-scode"), hwdisp.s_code);
+		await assertTextContent(this.page, _testSelector("hwdetail-s_code"), hwdisp.s_code);
 		await assertTextContent(this.page, _testSelector("hwdetail-no"), "No." + hwdisp.no);
 		await assertTextContent(this.page, _testSelector("hwdetail-title"), hwdisp.title);
-		await assertTextContent(this.page, _testSelector("hwcardbase-exp-aday"), hwdisp.date);
+		await assertTextContent(this.page, _testSelector("hw_card_base-exp-aday"), hwdisp.date);
 		const comments_text = await getTextContent(
 			this.page,
 			_testSelector("hwdetail-comments")
@@ -32,8 +32,8 @@ class E2EMan_HwDetail{
 		}
 	}
 	async addComment(comment = "", waitNotifyType = null){
-		await typeAfterClear(this.page, _testSelector("hwdetail-comment-input"), comment);
-		await this.page.click(_testSelector("hwdetail-comment-sendbtn"));
+		await typeAfterClear(this.page, _testSelector("hwdetail-comment_input__input"), comment);
+		await this.page.click(_testSelector("hwdetail-comment_input__sendbtn"));
 		while(
 			!(await getTextContent(
 				this.page,

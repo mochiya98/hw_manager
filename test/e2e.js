@@ -17,8 +17,8 @@ describe("E2E Tests", function(){
 		browser = await puppeteer.launch({
 			args    : ["--no-sandbox", "about:blank"],
 			//dumpio  : true,
-			headless: true,
-			//slowMo  : 30,
+			headless: false,
+			slowMo  : 25,
 			timeout : 0,
 		});
 	});
@@ -143,15 +143,4 @@ describe("E2E Tests", function(){
 			await e2eman_hwedit.testInputSaveResult({}, "info");
 		});
 	});
-/*
-		it("hwdetail", async() => {
-			await openPage("#/hws/e1964385-3407-4391-91e8-4bc285d322db");
-			await page.waitForSelector(sel("page-hwdetail"));
-		});
-		it("hwedit", async() => {
-			await openPage("#/hws/e1964385-3407-4391-91e8-4bc285d322db/edit");
-			await page.waitForSelector(sel("page-hwedit"));
-		});
-	*/
-	//await page.goto("http://localhost:3000", {waitUntil: "networkidle2"});
 });

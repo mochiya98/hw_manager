@@ -1,9 +1,9 @@
 import {h} from "hyperapp";
 import {location} from "hyperapp-hash-router";
 
-import HwCardTiny from "component/hwcardtiny";
-import generateUuid from "util/generateuuid";
-import ScopeSelector from "component/scope-selector";
+import HwCardTiny from "component/hw_card_tiny";
+import generateUuid from "util/generate_uuid";
+import ScopeSelector from "component/scope_selector";
 
 export default () => ($state, $actions) => {
 	const state = $state.page.home;
