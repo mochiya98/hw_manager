@@ -35,5 +35,5 @@ add and edit a homework.
 ### [DELETE] /hws/:hwid
 delete homeworks.
 
-### [POST] /hws/:hwid/comments/:comment_id
+### [PUT] /hws/:hwid/comments/:comment_id
 add a comment to a homework.
