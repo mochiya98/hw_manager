@@ -35,8 +35,8 @@
 	"scripts": {
 		"serve": "webpack-dev-server",
 		"build": "webpack --mode production",
-		"test": "webpack --mode development && mocha",
-		"mocha": "mocha"
+		"test": "webpack --mode development && mocha \"./test/**/*.spec.js\"",
+		"mocha": "mocha \"./test/**/*.spec.js\""
 	},
 	"license": "ISC"
 }
