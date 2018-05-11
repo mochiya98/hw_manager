@@ -1,0 +1,11 @@
+{
+	"useRequestInterceptor": true,
+	"emulateDevice": "Nexus 5",
+	"puppeteerConfig": {
+		"args"    : ["--no-sandbox", "about:blank"],
+		"dumpio"  : false,
+		"headless": false,
+		"slowMo"  : 25,
+		"timeout" : 0
+	}
+}
