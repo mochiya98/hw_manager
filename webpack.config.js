@@ -2,8 +2,10 @@ const path = require("path");
 
 const webpack = require("webpack");
 const merge = require("webpack-merge");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 
 const config = require("./config.js");
 
@@ -77,6 +79,29 @@ module.exports = (env, argv) => {
 				new webpack.DefinePlugin(
 					define
 				),
+			],
+		},
+		{
+			//html
+			plugins: [
+				new HtmlWebpackPlugin({
+					excludeChunks: ["app"],
+					title        : "HW Manager",
+					//filename: 'html.html',
+					minify       : define.PRODUCTION ? {
+						collapseBooleanAttributes : true,
+						collapseWhitespace        : true,
+						minifyCSS                 : true,
+						removeScriptTypeAttributes: true,
+					} : false,
+					hash    : false,
+					template: "index.html",
+					
+				}),
+				new ScriptExtHtmlWebpackPlugin({
+					defer           : "app.js",
+					defaultAttribute: "async",
+				 }),
 			],
 		},
 		{
