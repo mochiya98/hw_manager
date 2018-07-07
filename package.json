@@ -20,7 +20,7 @@
 		"babel-plugin-remove-test-ids": "^1.1.0",
 		"babel-plugin-transform-react-jsx": "^6.24.1",
 		"copy-webpack-plugin": "^4.5.1",
-		"css-loader": "^0.28.11",
+		"css-loader": "^1.0.0",
 		"eslint": "^5.0.0-alpha.4",
 		"eslint-plugin-react": "^7.9.1",
 		"extract-text-webpack-plugin": "^4.0.0-beta.0",
