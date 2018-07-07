@@ -13,7 +13,7 @@ npm run build
 ```
 
 ## Demo
-[HW Manager](https://mochiya98.tk/hw_manager/)
+[HW Manager](https://github.m98.be/hw_manager/)
 
 ### Demo Server Environment
 PHP+SQLite3 RESTful API  
